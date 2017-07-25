@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Kiphy</string>
+    <string name="gif_image_content_description">a GIF image</string>
+</resources>
