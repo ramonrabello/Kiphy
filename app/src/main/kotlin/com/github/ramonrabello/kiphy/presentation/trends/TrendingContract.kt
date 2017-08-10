@@ -11,9 +11,9 @@ interface TrendingContract {
      * View for Trending contract.
      */
     interface View {
-        fun showLoading()
-        fun hideLoading()
-        fun showTrends(trending: Trending?)
+        fun showProgress()
+        fun hideProgress()
+        fun showTrending(trending: Trending?)
         fun onLoadingTrendsError()
     }
 
@@ -21,7 +21,7 @@ interface TrendingContract {
      * Presenter for Trending contract.
      */
     interface Presenter {
-        fun loadTrends()
-        fun searchTrends(query:String)
+        fun loadTrending()
+        fun onTrendingClick(view:View)
     }
 }

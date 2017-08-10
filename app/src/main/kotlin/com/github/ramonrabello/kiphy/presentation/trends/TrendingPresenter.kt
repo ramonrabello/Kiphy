@@ -11,15 +11,15 @@ import retrofit2.Response
  */
 class TrendingPresenter(private val view:TrendingContract.View): TrendingContract.Presenter {
 
-    override fun loadTrends() {
-        view.showLoading()
+    override fun loadTrending() {
+        view.showProgress()
 
-        GiphyApi().trending().loadTrends().enqueue(object: Callback<Trending> {
+        GiphyApi.trending().load().enqueue(object: Callback<Trending> {
 
             override fun onResponse(call: Call<Trending>, response: Response<Trending>) {
                 if (response.isSuccessful){
-                    view.hideLoading()
-                    view.showTrends(response.body())
+                    view.hideProgress()
+                    view.showTrending(response.body())
                 } else {
                     view.onLoadingTrendsError()
                 }
@@ -31,7 +31,7 @@ class TrendingPresenter(private val view:TrendingContract.View): TrendingContrac
         })
     }
 
-    override fun searchTrends(query: String) {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onTrendingClick(view: TrendingContract.View) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

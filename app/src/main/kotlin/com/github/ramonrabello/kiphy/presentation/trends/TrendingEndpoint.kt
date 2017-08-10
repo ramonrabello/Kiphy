@@ -12,5 +12,5 @@ interface TrendingEndpoint {
 
     @Headers("api_key:53bb0d47f8af4574aa50807c5516a3ef")
     @GET("/v1/gifs/trending")
-    fun loadTrends(): Call<Trending>
+    fun load(): Call<Trending>
 }

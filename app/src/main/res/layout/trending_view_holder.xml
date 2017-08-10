@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:foreground="?selectableItemBackgroundBorderless"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/gif_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/gif_image_content_description" />
+
+    <TextView
+        android:id="@+id/gif_slug"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/tags_scrim"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="13sp" />
+
+</RelativeLayout>

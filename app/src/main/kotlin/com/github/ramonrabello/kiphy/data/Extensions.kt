@@ -3,10 +3,10 @@ package com.github.ramonrabello.kiphy.data
 import android.view.View
 
 /**
- * Created by ramonrabello on 11/07/17.
+ * Extension functions used in Kiphy.
  */
-fun View.visible() = this.run { visibility = View.VISIBLE }
-fun View.gone() = this.run {  visibility = View.GONE }
+fun View.visible() = run { this.visibility = View.VISIBLE }
+fun View.gone() = run { this.visibility = View.GONE }
 
 /**
  * Extension function that converts the slug
@@ -28,5 +28,5 @@ fun String.tagfy() : String {
             // concat all elements and save in a final String
             .forEach { it ->  slug += it }
 
-    return slug?.trim() ?: "No slug" // remove trailing spaces
+    return slug?.trim() ?: "" // remove trailing spaces
 }

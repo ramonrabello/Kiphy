@@ -9,10 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Class that will handle access to Giphy API endpoints
  * in a fluent way.
  */
-class GiphyApi {
+object GiphyApi {
 
-    var retrofit: Retrofit
-    val BASE_URL = "http://api.giphy.com"
+    private var retrofit: Retrofit
+    private val BASE_URL = "http://api.giphy.com"
 
     init {
         retrofit = Retrofit.Builder().baseUrl(BASE_URL)
@@ -21,5 +21,4 @@ class GiphyApi {
     }
 
     fun trending(): TrendingEndpoint = retrofit.create(TrendingEndpoint::class.java)
-    fun search(): TrendingEndpoint = retrofit.create(TrendingEndpoint::class.java)
 }

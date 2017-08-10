@@ -3,12 +3,14 @@ package com.github.ramonrabello.kiphy
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.progress_bar
 import kotlinx.android.synthetic.main.activity_main.trends_recycler_view
 import com.github.ramonrabello.kiphy.data.Trending
 import com.github.ramonrabello.kiphy.data.gone
 import com.github.ramonrabello.kiphy.data.visible
+import com.github.ramonrabello.kiphy.presentation.trends.SpacingItemDecoration
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingAdapter
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingContract
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingPresenter
@@ -28,25 +30,25 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
     override fun onResume() {
         super.onResume()
         trendingPresenter = TrendingPresenter(this)
-        trendingPresenter.loadTrends()
+        trendingPresenter.loadTrending()
     }
 
-    override fun showLoading() {
+    override fun showProgress() {
         progress_bar.visible()
-        trends_recycler_view.gone()
     }
 
-    override fun hideLoading() {
+    override fun hideProgress() {
         progress_bar.gone()
         trends_recycler_view.visible()
     }
 
-    override fun showTrends(trending: Trending?) {
+    override fun showTrending(trending: Trending?) {
+
         trends_recycler_view.apply {
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            addItemDecoration(SpacingItemDecoration(10))
             adapter = TrendingAdapter(trending!!.data)
         }
-
     }
 
     override fun onLoadingTrendsError() {
