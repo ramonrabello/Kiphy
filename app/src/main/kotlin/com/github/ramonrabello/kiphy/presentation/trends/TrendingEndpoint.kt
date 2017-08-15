@@ -6,11 +6,11 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 
 /**
- * Created by ramonrabello on 03/07/17.
+ * Retrofit interface for Trending API endpoint.
  */
 interface TrendingEndpoint {
 
-    @Headers("api_key:53bb0d47f8af4574aa50807c5516a3ef")
+    @Headers("api_key:{your_api_key_here}")
     @GET("/v1/gifs/trending")
     fun load(): Call<Trending>
 }
