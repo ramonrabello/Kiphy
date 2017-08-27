@@ -36,6 +36,7 @@ Open the _build.gradle_ (app module), search for GIPHY_API_KEY configuration fie
         }
         ...
     }
+    
 Now sync your project with gradle build files and that's it! Now you can run KIPHY in some AVD ou real devices.
      
   
