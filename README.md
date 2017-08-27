@@ -23,21 +23,20 @@ Open a terminal and type:
 # Integrating with GIPHY API
 ## Creating a GIPHY developers account
 In order to call GIPHY API, you primarily need a GIPHY developers account. To do so, follow the steps:
-1. Go to developers.giphy.com
-2. Click on _Create an App_ button
-3. Type a _Name_ and a _Description_ for your app.
-4. Copy the Api Key
+1.Go to developers.giphy.com
+2.Click on _Create an App_ button
+3.Type a _Name_ and a _Description_ for your app.
+4.Copy the Api Key
 
 ## Configuring build.gradle with GIPHY Api Key
 Open the _build.gradle_ (app module), search for GIPHY_API_KEY configuration field and paste the generated API KEY that you have previously copied. Your _build.gradle_ must be something like code below:
 
-    ```groovy
      buildTypes {
         debug {
             buildConfigField "String", '"GIPHY_API_KEY"','"{PASTE_YOUR_API_KEY_HERE}"'
         }
      }
-     ```
+     
 Now sync your project with gradle build files and that's it! Now you can run KIPHY in some AVD ou real devices.
      
   
