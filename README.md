@@ -1,6 +1,6 @@
 # What is KIPHY?
 KIPHY is a simple app that shows animated GIFs from GIPHY.com. This app was develop in my early days of Kotlin learning. It was written 100% in Kotlin, using:
-. Model-View-Presenter (MVP) presentation pattern
+. Model-View-Presenter (MVP) presentation architecture pattern
 . Glide 4 for displaying animated GIFs
 . Retrofit 2 for REST API calls
 . Gson for parsing JSON objects from GIPHY API endpoints
@@ -21,7 +21,7 @@ Open a terminal and type:
 
 # Integrating with GIPHY API
 ## Creating a GIPHY developers account
-In order to call GIPHY API, you need a GIPHY developers account. To do so, follow the steps:
+In order to call GIPHY API, you primarily need a GIPHY developers account. To do so, follow the steps:
 1. Go to developers.giphy.com
 2. Click on _Create an App_ button
 3. Type a _Name_ and a _Description_ for your app.
@@ -32,13 +32,11 @@ Open the _build.gradle_ (app module), search for GIPHY_API_KEY configuration fie
 
     buildTypes {
         debug {
-            buildConfigField('"GIPHY_API_KEY"','"{PASTE_YOUR_API_KEY_HERE}"')
+            buildConfigField "String", '"GIPHY_API_KEY"','"{PASTE_YOUR_API_KEY_HERE}"'
         }
         ...
     }
 Now sync your project with gradle build files and that's it! Now you can run KIPHY in some AVD ou real devices.
-
-
      
   
  
