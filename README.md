@@ -23,7 +23,7 @@ If you desire to do a checkout from Android Studio, follow these steps:
 # The GIPHY API
 ### Creating a GIPHY developers account
 In order to call GIPHY API, you primarily need a GIPHY developers account. To do so, follow the steps:
-1. Go to (http://developers.giphy.com)[Developers Dashboard].
+1. Go to [Developers Dashboard](http://developers.giphy.com).
 2. Click on _Create an App_ button.
 3. Type a _Name_ and a _Description_ for your app.
 4. Copy the Api Key. You will use it latter in your app.
