@@ -6,9 +6,9 @@ KIPHY is a simple app that shows animated GIFs from GIPHY.com. This app was deve
 * Retrofit 2 for REST API calls
 * Gson for parsing JSON objects from GIPHY API endpoints
 * Material Design Support Library
-* Android Studio 3.0 Preview (w/ Kotlin built-in support)
+* Kotlin Plugin
 
-# Download & Setup
+# Download
 
 If you want to clone the repo, open a terminal and type a git checkout command:
 
