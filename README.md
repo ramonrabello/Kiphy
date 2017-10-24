@@ -33,7 +33,7 @@ Open the _build.gradle_ (app module), search for GIPHY_API_KEY configuration fie
 ```groovy
 buildTypes {
     debug {
-        buildConfigField "String", 'GIPHY_API_KEY','"PASTE_YOUR_API_KEY_HERE"
+        buildConfigField "String", 'GIPHY_API_KEY','"PASTE_YOUR_API_KEY_HERE"'
     }
 }
 ``` 
