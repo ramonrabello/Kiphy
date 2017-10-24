@@ -13,8 +13,9 @@ interface TrendingContract {
     interface View {
         fun showProgress()
         fun hideProgress()
-        fun showTrending(trending: Trending?)
-        fun onLoadingTrendsError()
+        fun showTrending(trending: Trending)
+        fun showApikeyError()
+        fun showTrendingError()
     }
 
     /**
