@@ -15,7 +15,7 @@ class TrendingPresenter(private val view:TrendingContract.View): TrendingContrac
     override fun loadTrending() {
         view.showProgress()
 
-        if (BuildConfig.GIPHY_API_KEY.isNotEmpty() ||
+        if (BuildConfig.GIPHY_API_KEY.isEmpty() ||
                 BuildConfig.GIPHY_API_KEY == "PASTE_YOUR_API_KEY_HERE"){
             view.hideProgress()
             view.showApikeyError()
