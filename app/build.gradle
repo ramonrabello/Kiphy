@@ -15,9 +15,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            buildConfigField "String", 'GIPHY_API_KEY', '"PASTE_YOUR_API_KEY_HERE"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", 'GIPHY_API_KEY','PASTE_YOUR_API_KEY_HERE'
         }
     }
 
@@ -33,11 +37,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlinVersion"
-    implementation 'com.android.support:appcompat-v7:25.4.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // Support Libraries
+    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:palette-v7:${rootProject.supportLibraryVersion}"
     implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
@@ -50,4 +54,8 @@ dependencies {
     // Retrofit 2
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
+
+    // OkHttp 3
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttpVersion}"
 }
