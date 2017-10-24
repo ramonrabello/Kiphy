@@ -1,5 +1,6 @@
 package com.github.ramonrabello.kiphy.presentation.trends
 
+import com.github.ramonrabello.kiphy.BuildConfig
 import com.github.ramonrabello.kiphy.data.GiphyApi
 import com.github.ramonrabello.kiphy.data.Trending
 import retrofit2.Call
@@ -14,19 +15,25 @@ class TrendingPresenter(private val view:TrendingContract.View): TrendingContrac
     override fun loadTrending() {
         view.showProgress()
 
+        if (BuildConfig.GIPHY_API_KEY.isNotEmpty() ||
+                BuildConfig.GIPHY_API_KEY == "PASTE_YOUR_API_KEY_HERE"){
+            view.hideProgress()
+            view.showApikeyError()
+        }
+
         GiphyApi.trending().load().enqueue(object: Callback<Trending> {
 
             override fun onResponse(call: Call<Trending>, response: Response<Trending>) {
                 if (response.isSuccessful){
                     view.hideProgress()
-                    view.showTrending(response.body())
+                    response.body()?.let { view.showTrending(it) }
                 } else {
-                    view.onLoadingTrendsError()
+                    view.showTrendingError()
                 }
             }
 
             override fun onFailure(call: Call<Trending>, t: Throwable) {
-                view.onLoadingTrendsError()
+                view.showTrendingError()
             }
         })
     }
