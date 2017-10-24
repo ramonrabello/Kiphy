@@ -14,7 +14,7 @@ fun View.gone() = run { this.visibility = View.GONE }
  * '#tag1 #tag2 #tag3' format.
  */
 fun String.tagfy() : String {
-    var slug:String? = ""
+    var slug = ""
 
     // splits words using delimiter '-'
     this.split("-")
@@ -28,5 +28,5 @@ fun String.tagfy() : String {
             // concat all elements and save in a final String
             .forEach { it ->  slug += it }
 
-    return slug?.trim() ?: "" // remove trailing spaces
+    return slug.trim()
 }
