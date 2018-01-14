@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Kiphy.iml" filepath="$PROJECT_DIR$/.idea/Kiphy.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kiphy.iml" filepath="$PROJECT_DIR$/Kiphy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

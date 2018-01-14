@@ -5,8 +5,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-rc2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.4-3"
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.51"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -28,12 +28,12 @@ task clean(type: Delete) {
 ext {
     // sdk tools
     minSdkVersion = 15
-    compileSdkVersion = 26
-    targetSdkVersion = 26
+    compileSdkVersion = 27
+    targetSdkVersion = 27
     buildToolsVersion = "26.0.2"
 
     // libraries
-    supportLibraryVersion = '26.1.0'
+    supportLibraryVersion = '27.0.2'
     kotlinVersion = '1.1.4-3'
     butterKnifeVersion = '8.6.0'
     retrofitVersion = '2.3.0'
