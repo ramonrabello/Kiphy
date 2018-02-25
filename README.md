@@ -1,7 +1,7 @@
 # What is KIPHY?
 KIPHY is a simple app that shows animated GIFs from GIPHY.com. This app was develop in my early days of Kotlin learning. It was written 100% in Kotlin, using:
 
-* Model-View-Presenter (MVP) presentation architecture pattern
+* Model-View-Presenter (MVP) presentation pattern
 * Glide 4 for displaying animated GIFs
 * Retrofit 2 for REST API calls
 * Gson for parsing JSON objects from GIPHY API endpoints
