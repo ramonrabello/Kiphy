@@ -1,13 +1,12 @@
 package com.github.ramonrabello.kiphy
 
-import android.content.DialogInterface
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.Toast
+import android.widget.ProgressBar
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.ramonrabello.kiphy.data.Trending
 import com.github.ramonrabello.kiphy.data.gone
 import com.github.ramonrabello.kiphy.data.visible
@@ -15,18 +14,24 @@ import com.github.ramonrabello.kiphy.presentation.trends.SpacingItemDecoration
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingAdapter
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingContract
 import com.github.ramonrabello.kiphy.presentation.trends.TrendingPresenter
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Main Activity for the app.
  */
 class MainActivity : AppCompatActivity(), TrendingContract.View {
 
-    private lateinit var trendingPresenter:TrendingContract.Presenter
+    private lateinit var trendingPresenter: TrendingContract.Presenter
+    private lateinit var progressBar: ProgressBar
+    private lateinit var trendsRecyclerView: RecyclerView
+    private lateinit var coordinatorLayout: CoordinatorLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        progressBar = findViewById(R.id.progress_bar)
+        trendsRecyclerView = findViewById(R.id.trends_recycler_view)
+        coordinatorLayout = findViewById(R.id.coordinator_layout)
     }
 
     override fun onResume() {
@@ -36,17 +41,17 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
     }
 
     override fun showProgress() {
-        progress_bar.visible()
+        progressBar.visible()
     }
 
     override fun hideProgress() {
-        progress_bar.gone()
-        trends_recycler_view.visible()
+        progressBar.gone()
+        trendsRecyclerView.visible()
     }
 
     override fun showTrending(trending: Trending) {
 
-        trends_recycler_view.apply {
+        trendsRecyclerView.apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             addItemDecoration(SpacingItemDecoration(10))
             adapter = TrendingAdapter(trending.data)
@@ -54,7 +59,7 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
     }
 
     override fun showTrendingError() {
-        Snackbar.make(coordinator_layout, getString(R.string.trending_error), Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(coordinatorLayout, getString(R.string.trending_error), Snackbar.LENGTH_SHORT).show()
     }
 
     override fun showApikeyError() {
