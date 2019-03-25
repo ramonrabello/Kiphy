@@ -1,4 +1,4 @@
-package com.github.ramonrabello.kiphy.presentation.trends
+package com.github.ramonrabello.kiphy.trends
 
 import android.graphics.Rect
 import android.view.View

@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.github.ramonrabello.kiphy.data.Trending
-import com.github.ramonrabello.kiphy.data.gone
-import com.github.ramonrabello.kiphy.data.visible
-import com.github.ramonrabello.kiphy.presentation.trends.SpacingItemDecoration
-import com.github.ramonrabello.kiphy.presentation.trends.TrendingAdapter
-import com.github.ramonrabello.kiphy.presentation.trends.TrendingContract
-import com.github.ramonrabello.kiphy.presentation.trends.TrendingPresenter
+import com.github.ramonrabello.kiphy.data.model.Trending
+import com.github.ramonrabello.kiphy.common.extensions.gone
+import com.github.ramonrabello.kiphy.common.extensions.visible
+import com.github.ramonrabello.kiphy.trends.SpacingItemDecoration
+import com.github.ramonrabello.kiphy.trends.TrendingAdapter
+import com.github.ramonrabello.kiphy.trends.TrendingContract
+import com.github.ramonrabello.kiphy.trends.TrendingPresenter
 import com.google.android.material.snackbar.Snackbar
 
 /**

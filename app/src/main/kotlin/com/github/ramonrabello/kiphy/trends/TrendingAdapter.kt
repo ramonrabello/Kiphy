@@ -1,4 +1,4 @@
-package com.github.ramonrabello.kiphy.presentation.trends
+package com.github.ramonrabello.kiphy.trends
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -14,8 +14,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.github.ramonrabello.kiphy.R
-import com.github.ramonrabello.kiphy.data.Data
-import com.github.ramonrabello.kiphy.data.tagfy
+import com.github.ramonrabello.kiphy.data.model.Data
+import com.github.ramonrabello.kiphy.common.extensions.slugfy
 import java.util.*
 
 /**
@@ -73,7 +73,7 @@ class TrendingAdapter(private val data: List<Data>) : RecyclerView.Adapter<Trend
                             .centerCrop())
                     .transition(DrawableTransitionOptions.withCrossFade(android.R.anim.fade_in, 300))
                     .into(gifImage)
-            gitSlug.text = data.slug.tagfy()
+            gitSlug.text = data.slug.slugfy()
         }
     }
 }

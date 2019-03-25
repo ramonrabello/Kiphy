@@ -1,4 +1,4 @@
-package com.github.ramonrabello.kiphy.data
+package com.github.ramonrabello.kiphy.data.model
 
 /**
  * Represents a trending from Giphy Trending API.

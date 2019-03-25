@@ -1,6 +1,6 @@
-package com.github.ramonrabello.kiphy.presentation.trends
+package com.github.ramonrabello.kiphy.trends
 
-import com.github.ramonrabello.kiphy.data.Trending
+import com.github.ramonrabello.kiphy.data.model.Trending
 
 /**
  * MVP contract for Giphy Trending API.

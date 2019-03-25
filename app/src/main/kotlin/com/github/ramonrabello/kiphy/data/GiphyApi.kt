@@ -1,7 +1,7 @@
 package com.github.ramonrabello.kiphy.data
 
 import com.github.ramonrabello.kiphy.BuildConfig
-import com.github.ramonrabello.kiphy.presentation.trends.TrendingEndpoint
+import com.github.ramonrabello.kiphy.trends.TrendingEndpoint
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
