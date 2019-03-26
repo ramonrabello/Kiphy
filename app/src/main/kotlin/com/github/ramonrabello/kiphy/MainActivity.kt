@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.github.ramonrabello.kiphy.data.model.Trending
 import com.github.ramonrabello.kiphy.common.extensions.gone
 import com.github.ramonrabello.kiphy.common.extensions.visible
 import com.github.ramonrabello.kiphy.trends.SpacingItemDecoration
 import com.github.ramonrabello.kiphy.trends.TrendingAdapter
 import com.github.ramonrabello.kiphy.trends.TrendingContract
 import com.github.ramonrabello.kiphy.trends.TrendingPresenter
+import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
  */
 class MainActivity : AppCompatActivity(), TrendingContract.View {
 
+    private val trendingAdapter by lazy { TrendingAdapter() }
     private lateinit var trendingPresenter: TrendingContract.Presenter
     private lateinit var progressBar: ProgressBar
     private lateinit var trendsRecyclerView: RecyclerView
@@ -32,12 +33,21 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
         progressBar = findViewById(R.id.progress_bar)
         trendsRecyclerView = findViewById(R.id.trends_recycler_view)
         coordinatorLayout = findViewById(R.id.coordinator_layout)
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        trendsRecyclerView.apply {
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            addItemDecoration(SpacingItemDecoration(resources.getDimensionPixelSize(R.dimen.spacing_item_decoration_offset)))
+            adapter = trendingAdapter
+        }
     }
 
     override fun onResume() {
         super.onResume()
         trendingPresenter = TrendingPresenter(this)
-        trendingPresenter.loadTrending()
+        trendingPresenter.loadTrends()
     }
 
     override fun showProgress() {
@@ -49,20 +59,15 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
         trendsRecyclerView.visible()
     }
 
-    override fun showTrending(trending: Trending) {
-
-        trendsRecyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            addItemDecoration(SpacingItemDecoration(10))
-            adapter = TrendingAdapter(trending.data)
-        }
+    override fun showTrending(trending: TrendingResponse) {
+        trendingAdapter.addTrends(trending.data)
     }
 
     override fun showTrendingError() {
         Snackbar.make(coordinatorLayout, getString(R.string.trending_error), Snackbar.LENGTH_SHORT).show()
     }
 
-    override fun showApikeyError() {
+    override fun showApiKeyNotSetDialog() {
         val alertDialogError = AlertDialog.Builder(this)
                 .setTitle(getString(R.string.dialog_title))
                 .setPositiveButton(getString(R.string.dialog_close_button), null)
