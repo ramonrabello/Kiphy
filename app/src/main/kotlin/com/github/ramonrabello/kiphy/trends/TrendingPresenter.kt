@@ -2,7 +2,7 @@ package com.github.ramonrabello.kiphy.trends
 
 import com.github.ramonrabello.kiphy.BuildConfig
 import com.github.ramonrabello.kiphy.data.GiphyApi
-import com.github.ramonrabello.kiphy.data.model.Trending
+import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,33 +12,28 @@ import retrofit2.Response
  */
 class TrendingPresenter(private val view:TrendingContract.View): TrendingContract.Presenter {
 
-    override fun loadTrending() {
+    override fun loadTrends() {
         view.showProgress()
 
-        if (BuildConfig.GIPHY_API_KEY.isEmpty() ||
-                BuildConfig.GIPHY_API_KEY == "PASTE_YOUR_API_KEY_HERE"){
+        if (BuildConfig.GIPHY_API_KEY.isEmpty()){
             view.hideProgress()
-            view.showApikeyError()
+            view.showApiKeyNotSetDialog()
         }
 
-        GiphyApi.trending().load().enqueue(object: Callback<Trending> {
+        GiphyApi.trending().load().enqueue(object: Callback<TrendingResponse> {
 
-            override fun onResponse(call: Call<Trending>, response: Response<Trending>) {
+            override fun onResponse(call: Call<TrendingResponse>, response: Response<TrendingResponse>) {
                 if (response.isSuccessful){
                     view.hideProgress()
-                    response.body()?.let { view.showTrending(it) }
+                    response.body()?.let { body -> view.showTrending(body) }
                 } else {
                     view.showTrendingError()
                 }
             }
 
-            override fun onFailure(call: Call<Trending>, t: Throwable) {
+            override fun onFailure(call: Call<TrendingResponse>, t: Throwable) {
                 view.showTrendingError()
             }
         })
-    }
-
-    override fun onTrendingClick(view: TrendingContract.View) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
