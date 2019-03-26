@@ -7,6 +7,7 @@ KIPHY is a simple app that shows animated GIFs from GIPHY.com. This app was deve
 * Gson for parsing JSON objects from GIPHY API endpoints
 * Material Design Support Library
 * Kotlin Plugin
+* Kotlin Coroutines
 
 # Download
 
@@ -28,13 +29,18 @@ In order to call GIPHY API, you primarily need a GIPHY developers account. To do
 3. Type a _Name_ and a _Description_ for your app.
 4. Copy the Api Key. You will use it latter in your app.
 
-## Configuring build.gradle with GIPHY Api Key
-Open the _build.gradle_ (app module), search for GIPHY_API_KEY configuration field and paste the generated API KEY that you have previously copied. Your _build.gradle_ must be something like code below:
+## Configuring build.gradle with GIPHY Api Keys
+Inside the _gradle.properties_, you'll find two properties: `debugApiKey` and `productionApiKey`.
+Paste the generated API KEY (according to the build type that you are working on) that you have previously copied. Both properties 
+are already being set using Gradle's Build Config Fields inside your build.gradle (app module), as shown below:
 ```groovy
 buildTypes {
     debug {
-        buildConfigField "String", 'GIPHY_API_KEY','"PASTE_YOUR_API_KEY_HERE"'
+        buildConfigField "String", 'GIPHY_API_KEY', project.debugApiKey
+    }
+    release {
+        buildConfigField "String", 'GIPHY_API_KEY', project.productionApiKey
     }
 }
-``` 
+```
 Now sync your project with gradle build files and that's it! Now you can run KIPHY in some AVD ou real devices.
