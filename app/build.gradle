@@ -14,22 +14,17 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", 'GIPHY_API_KEY', project.apiKey
+            buildConfigField "String", 'GIPHY_API_KEY', project.debugApiKey
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", 'GIPHY_API_KEY', 'PASTE_YOUR_API_KEY_HERE'
+            buildConfigField "String", 'GIPHY_API_KEY', project.productionApiKey
         }
     }
     sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
-    }
-    buildToolsVersion '28.0.3'
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
