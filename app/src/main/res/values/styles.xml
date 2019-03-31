@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearance</item>
+    </style>
+
+    <style name="TextAppearance" parent="@android:style/TextAppearance.Small">
+        <item name="fontFamily">@font/opensans_regular</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="fontFamily">@font/opensans_semibold</item>
     </style>
 
 </resources>
