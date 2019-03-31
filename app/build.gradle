@@ -1,61 +1,52 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "com.github.ramonrabello.kiphy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         debug {
-            buildConfigField "String", 'GIPHY_API_KEY', '"PASTE_YOUR_API_KEY_HERE"'
+            buildConfigField "String", 'GIPHY_API_KEY', project.debugApiKey
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", 'GIPHY_API_KEY','PASTE_YOUR_API_KEY_HERE'
+            buildConfigField "String", 'GIPHY_API_KEY', project.productionApiKey
         }
     }
-
-    sourceSets{
+    sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlinVersion"
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-
-    // Support Libraries
-    implementation "com.android.support:appcompat-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:palette-v7:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:design:${rootProject.supportLibraryVersion}"
-    implementation "com.android.support:support-v4:${rootProject.supportLibraryVersion}"
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha04'
     // Glide 4
     implementation "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
     kapt "com.github.bumptech.glide:compiler:${rootProject.glideVersion}"
-
     // Retrofit 2
     implementation "com.squareup.retrofit2:retrofit:${rootProject.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.retrofitVersion}"
-
     // OkHttp 3
     implementation "com.squareup.okhttp3:okhttp:${rootProject.okhttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.okhttpVersion}"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

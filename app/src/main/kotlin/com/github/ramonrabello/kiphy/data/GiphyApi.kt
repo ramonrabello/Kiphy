@@ -1,7 +1,7 @@
 package com.github.ramonrabello.kiphy.data
 
 import com.github.ramonrabello.kiphy.BuildConfig
-import com.github.ramonrabello.kiphy.presentation.trends.TrendingEndpoint
+import com.github.ramonrabello.kiphy.trends.TrendingEndpoint
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * in a fluent way.
  */
 object GiphyApi {
-
+    private const val API_KEY_PARAM = "api_key"
     private var retrofit: Retrofit
     private const val BASE_URL = "http://api.giphy.com"
 
@@ -23,7 +23,7 @@ object GiphyApi {
             chain ->
             val original = chain.request()
             val requestBuilder = original.newBuilder()
-            requestBuilder.addHeader("api_key", BuildConfig.GIPHY_API_KEY)
+            requestBuilder.addHeader(API_KEY_PARAM, BuildConfig.GIPHY_API_KEY)
             val request = requestBuilder.build()
             chain.proceed(request)
         }

@@ -1,6 +1,6 @@
-package com.github.ramonrabello.kiphy.presentation.trends
+package com.github.ramonrabello.kiphy.trends
 
-import com.github.ramonrabello.kiphy.data.Trending
+import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -10,5 +10,5 @@ import retrofit2.http.GET
 interface TrendingEndpoint {
 
     @GET("/v1/gifs/trending")
-    fun load(): Call<Trending>
+    fun load(): Call<TrendingResponse>
 }

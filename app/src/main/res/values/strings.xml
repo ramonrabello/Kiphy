@@ -2,7 +2,7 @@
     <string name="app_name">Kiphy</string>
     <string name="gif_image_content_description">a GIF image</string>
     <string name="trending_error">Could not load trends.</string>
-    <string name="api_key_error">Please check if your GIPHY API KEY is properly set.</string>
+    <string name="api_key_error">Please check if your GIPHY API Key is properly set on gradle.properties.</string>
     <string name="dialog_close_button">Close</string>
-    <string name="dialog_title">Error</string>
+    <string name="dialog_title">API Keys not set</string>
 </resources>

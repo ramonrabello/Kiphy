@@ -1,6 +1,6 @@
-package com.github.ramonrabello.kiphy.presentation.trends
+package com.github.ramonrabello.kiphy.trends
 
-import com.github.ramonrabello.kiphy.data.Trending
+import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 
 /**
  * MVP contract for Giphy Trending API.
@@ -13,8 +13,8 @@ interface TrendingContract {
     interface View {
         fun showProgress()
         fun hideProgress()
-        fun showTrending(trending: Trending)
-        fun showApikeyError()
+        fun showTrending(trending: TrendingResponse)
+        fun showApiKeyNotSetDialog()
         fun showTrendingError()
     }
 
@@ -22,7 +22,6 @@ interface TrendingContract {
      * Presenter for Trending contract.
      */
     interface Presenter {
-        fun loadTrending()
-        fun onTrendingClick(view:View)
+        fun loadTrends()
     }
 }
