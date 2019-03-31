@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -14,8 +13,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.github.ramonrabello.kiphy.R
 import com.github.ramonrabello.kiphy.common.extensions.slugfy
+import com.github.ramonrabello.kiphy.common.ui.util.ColoredPlaceholderGenerator
 import com.github.ramonrabello.kiphy.trends.model.DataResponse
-import java.util.*
 
 /**
  * Adapter for trending items.
@@ -30,7 +29,9 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.trending_view_holder, parent, false)
+        val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.trending_view_holder,
+                        parent, false)
         return TrendingViewHolder(view)
     }
 
@@ -57,27 +58,16 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
                 // TODO: handle on click event later on
             }
 
-            // region TODO: Create PlaceholderColorGenerator and following logic to it
-            val placeholderColors = arrayOf(
-                    R.color.colorLightGreen,
-                    R.color.colorLightBlue,
-                    R.color.colorLightPurple,
-                    R.color.colorLightRed,
-                    R.color.colorLightYellow
-            )
-
-            // choose random color to be the image placeholder
-            val randomIndex = Random().nextInt(placeholderColors.size + 1 - 1) + 1
-            // endregion TODO
-
             Glide.with(itemView.context)
                     .asGif()
                     .load(data.images.fixed_width.url)
                     .apply(RequestOptions()
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .placeholder(ColorDrawable(ContextCompat.getColor(itemView.context, placeholderColors[randomIndex - 1])))
+                            .placeholder(ColorDrawable(
+                                    ColoredPlaceholderGenerator.generate(itemView.context)))
                             .centerCrop())
-                    .transition(DrawableTransitionOptions.withCrossFade(android.R.anim.fade_in, 300))
+                    .transition(DrawableTransitionOptions
+                            .withCrossFade(android.R.anim.fade_in, 250))
                     .into(gifImage)
             gitSlug.text = data.slug.slugfy()
         }
