@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -22,17 +23,16 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity(), TrendingContract.View {
 
     private val trendingAdapter by lazy { TrendingAdapter() }
-    private lateinit var trendingPresenter: TrendingContract.Presenter
-    private lateinit var progressBar: ProgressBar
-    private lateinit var trendsRecyclerView: RecyclerView
-    private lateinit var coordinatorLayout: CoordinatorLayout
+    private val trendingPresenter by lazy { TrendingPresenter(this) }
+    private val progressBar by lazy { findViewById<ProgressBar>(R.id.progress_bar) }
+    private val trendsRecyclerView by lazy { findViewById<RecyclerView>(R.id.trends_recycler_view) }
+    private val coordinatorLayout by lazy { findViewById<CoordinatorLayout>(R.id.coordinator_layout) }
+    private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        progressBar = findViewById(R.id.progress_bar)
-        trendsRecyclerView = findViewById(R.id.trends_recycler_view)
-        coordinatorLayout = findViewById(R.id.coordinator_layout)
+        setSupportActionBar(toolbar)
         setupRecyclerView()
     }
 
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(), TrendingContract.View {
 
     override fun onResume() {
         super.onResume()
-        trendingPresenter = TrendingPresenter(this)
         trendingPresenter.loadTrends()
     }
 
