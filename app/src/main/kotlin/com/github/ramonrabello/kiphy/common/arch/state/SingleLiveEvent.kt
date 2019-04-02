@@ -1,4 +1,4 @@
-package com.github.ramonrabello.kiphy.common.arch
+package com.github.ramonrabello.kiphy.common.arch.state
 
 import android.util.Log
 import androidx.annotation.MainThread
