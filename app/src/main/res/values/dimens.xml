@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="spacing_item_decoration_offset">5dp</dimen>
+    <dimen name="spacing_item_decoration_offset">3dp</dimen>
 </resources>
