@@ -66,8 +66,7 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
                             .placeholder(ColorDrawable(
                                     ColoredPlaceholderGenerator.generate(itemView.context)))
                             .centerCrop())
-                    .transition(DrawableTransitionOptions
-                            .withCrossFade(android.R.anim.fade_in, 250))
+                    .transition(DrawableTransitionOptions.withCrossFade(250))
                     .into(gifImage)
             gitSlug.text = data.slug.slugfy()
         }
