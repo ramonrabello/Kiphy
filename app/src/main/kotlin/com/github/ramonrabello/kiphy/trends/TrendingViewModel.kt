@@ -42,7 +42,7 @@ class TrendingViewModel : ViewModel() {
             _uiStateEvent.postErrorState()
             _trendsDataEvent.postValue(Result.Error.ApiKeyNotSetError)
         } else {
-            val disposable = repository.loadTrends()
+            val disposable = repository.loadTrending()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { _uiStateEvent.postLoadingState() }
