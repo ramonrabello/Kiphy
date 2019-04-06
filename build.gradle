@@ -36,5 +36,7 @@ ext {
     kotlinVersion = '1.3.21'
     retrofitVersion = '2.3.0'
     okhttpVersion = '3.9.0'
-    glideVersion = '4.0.0-RC1'
+    glideVersion = '4.9.0'
+    rxJavaVersion = '2.2.8'
+    rxAndroidVersion = '2.1.1'
 }
