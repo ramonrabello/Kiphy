@@ -25,12 +25,12 @@ class TrendingFragment : Fragment() {
     private lateinit var progressBar: ProgressBar
     private lateinit var trendsRecyclerView: RecyclerView
     private lateinit var parentContainer: View
+    private lateinit var viewModel: TrendingViewModel
 
     companion object {
         fun newInstance() = TrendingFragment()
-    }
 
-    private lateinit var viewModel: TrendingViewModel
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,7 +47,7 @@ class TrendingFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(TrendingViewModel::class.java)
         observeUiState()
         observeTrendingData()
-        viewModel.loadTrends()
+        viewModel.loadTrending()
     }
 
     private fun observeTrendingData() {
@@ -74,6 +74,9 @@ class TrendingFragment : Fragment() {
                     showProgress()
                 }
                 is UiState.Loaded -> {
+                    hideProgress()
+                }
+                is UiState.Error -> {
                     hideProgress()
                 }
             }
