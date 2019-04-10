@@ -10,7 +10,13 @@ interface TrendingDataSource {
 
     class Remote(private val api: TrendingApi) : TrendingDataSource {
 
-        override fun loadTrending() =  api.loadTrending()
+        override fun loadTrending() = api.loadTrending()
+
+    }
+
+    class Local : TrendingDataSource {
+
+        override fun loadTrending() = Single.fromCallable { TrendingResponse((emptyList())) }
 
     }
 }
