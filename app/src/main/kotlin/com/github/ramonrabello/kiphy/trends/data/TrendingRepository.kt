@@ -1,6 +1,12 @@
 package com.github.ramonrabello.kiphy.trends.data
 
-class TrendingRepository(private val remoteDataSource: TrendingDataSource) {
+import io.reactivex.Single
 
-    fun loadTrending() = remoteDataSource.loadTrending()
+class TrendingRepository(
+        private val localDataSource: TrendingDataSource,
+        private val remoteDataSource: TrendingDataSource) {
+
+    fun loadTrending() = Single.merge(
+            remoteDataSource.loadTrending(),
+            localDataSource.loadTrending())
 }
