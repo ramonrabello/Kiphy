@@ -1,6 +1,8 @@
 package com.github.ramonrabello.kiphy.trends.data
 
 import com.github.ramonrabello.kiphy.trends.TrendingApi
+import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
+import com.github.ramonrabello.kiphy.trends.data.source.remote.RemoteTrendingDataSource
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -15,7 +17,7 @@ class RemoteTrendingDataSourceTest {
     @Before
     fun setUp() {
         api = mock(TrendingApi::class.java)
-        remoteTrendingDataSource = TrendingDataSource.Remote(api)
+        remoteTrendingDataSource = RemoteTrendingDataSource(api)
     }
 
     @Test
