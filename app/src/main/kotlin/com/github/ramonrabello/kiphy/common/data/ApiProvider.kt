@@ -1,19 +1,19 @@
-package com.github.ramonrabello.kiphy.data
+package com.github.ramonrabello.kiphy.common.data
 
 import com.github.ramonrabello.kiphy.BuildConfig
-import com.github.ramonrabello.kiphy.trends.TrendingEndpoint
+import com.github.ramonrabello.kiphy.trends.TrendingApi
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * Class that will handle access to Giphy API endpoints
- * in a fluent way.
+ * Singleton that handle all network setup for API calls.
  */
-object GiphyApi {
+object ApiProvider {
     private const val API_KEY_PARAM = "api_key"
     private const val BASE_URL = "http://api.giphy.com"
     private const val TIMEOUT_LIMIT_IN_MILLIS = 30_000L
@@ -24,6 +24,7 @@ object GiphyApi {
         retrofit = Retrofit.Builder().baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
 
@@ -48,5 +49,5 @@ object GiphyApi {
         return okHttpClient.build()
     }
 
-    fun trending(): TrendingEndpoint = retrofit.create(TrendingEndpoint::class.java)
+    fun providesTrendingApi(): TrendingApi = retrofit.create(TrendingApi::class.java)
 }
