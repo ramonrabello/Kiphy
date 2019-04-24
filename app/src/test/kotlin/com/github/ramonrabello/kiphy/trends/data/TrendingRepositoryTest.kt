@@ -1,5 +1,6 @@
 package com.github.ramonrabello.kiphy.trends.data
 
+import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import io.reactivex.Single
 import org.junit.Before
