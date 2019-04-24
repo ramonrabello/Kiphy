@@ -1,9 +1,9 @@
 package com.github.ramonrabello.kiphy.trends.data.source
 
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface TrendingDataSource {
 
-    fun loadTrending(): Single<TrendingResponse>
+    fun loadTrendingAsync(): Deferred<TrendingResponse>
 }

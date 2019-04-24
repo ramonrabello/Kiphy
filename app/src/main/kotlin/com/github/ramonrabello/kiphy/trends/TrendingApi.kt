@@ -1,7 +1,7 @@
 package com.github.ramonrabello.kiphy.trends
 
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
 /**
@@ -10,5 +10,5 @@ import retrofit2.http.GET
 interface TrendingApi {
 
     @GET("/v1/gifs/trending")
-    fun loadTrending(): Single<TrendingResponse>
+    fun loadTrendingAsync(): Deferred<TrendingResponse>
 }

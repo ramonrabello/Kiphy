@@ -42,4 +42,5 @@ ext {
     coreTestingVersion = '1.1.1'
     junitVersion = '4.12'
     mockitoVersion = '2.21.0'
+    coroutinesVersion = '1.2.0'
 }

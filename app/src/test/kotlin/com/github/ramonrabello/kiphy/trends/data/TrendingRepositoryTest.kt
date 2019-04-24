@@ -3,6 +3,7 @@ package com.github.ramonrabello.kiphy.trends.data
 import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import io.reactivex.Single
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -23,17 +24,17 @@ class TrendingRepositoryTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        repository = TrendingRepository(localDataSource, remoteDataSource)
+        repository = TrendingRepository(remoteDataSource)
     }
 
     @Test
     fun `when loading repository verify if both remote and local data sources are called`() {
-        `when`(localDataSource.loadTrending())
-                .thenReturn(Single.just(TrendingResponse(emptyList())))
-        `when`(remoteDataSource.loadTrending())
-                .thenReturn(Single.just(TrendingResponse(emptyList())))
-        repository.loadTrending()
-        verify(localDataSource).loadTrending()
-        verify(remoteDataSource).loadTrending()
+        runBlocking {
+//            `when`(remoteDataSource.loadTrendingAsync())
+//                    .thenReturn(Single.just(TrendingResponse(emptyList())))
+            repository.loadTrendingAsync().await()
+            //verify(localDataSource).loadTrendingAsync().await()
+            verify(remoteDataSource).loadTrendingAsync().await()
+        }
     }
 }

@@ -22,7 +22,7 @@ class RemoteTrendingDataSourceTest {
 
     @Test
     fun `when loading trending verify if api was called`() {
-        remoteTrendingDataSource.loadTrending()
-        verify(api).loadTrending()
+        remoteTrendingDataSource.loadTrendingAsync()
+        verify(api).loadTrendingAsync()
     }
 }

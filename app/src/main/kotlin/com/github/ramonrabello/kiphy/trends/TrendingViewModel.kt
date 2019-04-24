@@ -17,6 +17,7 @@ import com.github.ramonrabello.kiphy.trends.data.source.remote.RemoteTrendingDat
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 
 class TrendingViewModel : BaseViewModel() {
 
@@ -30,20 +31,22 @@ class TrendingViewModel : BaseViewModel() {
 
     private val repository by lazy {
         val api = ApiProvider.providesTrendingApi()
-        TrendingRepository(RemoteTrendingDataSource(api), LocalTrendingDataSource())
+        TrendingRepository(RemoteTrendingDataSource(api))
     }
 
     fun loadTrending() {
-        if (BuildConfig.GIPHY_API_KEY.isEmpty()) {
-            _uiStateEvent.postErrorState()
-            _trendsDataEvent.postValue(Result.Error.ApiKeyNotSetError)
-        } else {
-            repository.loadTrending()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { _uiStateEvent.postLoadingState() }
-                    .subscribe(::onTrendingLoaded, ::onError)
-                    .composeDisposable()
+        jobs add launch {
+            if (BuildConfig.GIPHY_API_KEY.isEmpty()) {
+                _uiStateEvent.postErrorState()
+                _trendsDataEvent.postValue(Result.Error.ApiKeyNotSetError)
+            } else {
+                try {
+                    val trending = repository.loadTrendingAsync().await() // suspend
+                    onTrendingLoaded(trending)
+                }catch (error: Throwable){
+                    onError(error)
+                }
+            }
         }
     }
 

@@ -1,13 +1,13 @@
 package com.github.ramonrabello.kiphy.trends.data
 
 import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
-import io.reactivex.Single
+import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
+import kotlinx.coroutines.Deferred
 
 class TrendingRepository(
-        private val localDataSource: TrendingDataSource,
         private val remoteDataSource: TrendingDataSource) {
 
-    fun loadTrending() = Single.merge(
-            remoteDataSource.loadTrending(),
-            localDataSource.loadTrending())
+    fun loadTrendingAsync() : Deferred<TrendingResponse>
+        //val local = localDataSource.loadTrendingAsync()
+        = remoteDataSource.loadTrendingAsync()
 }
