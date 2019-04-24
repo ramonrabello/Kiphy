@@ -6,9 +6,9 @@ import io.reactivex.disposables.Disposable
 
 open class BaseViewModel : ViewModel() {
 
-    private val compositeDisposable by lazy { CompositeDisposable() }
+    private val compositeDisposable = CompositeDisposable()
 
-    fun Disposable.safeDispose() = compositeDisposable.add(this)
+    fun Disposable.composeDisposable() = compositeDisposable.add(this)
 
     override fun onCleared() {
         super.onCleared()
