@@ -11,8 +11,9 @@ import com.github.ramonrabello.kiphy.common.extensions.postEmptyState
 import com.github.ramonrabello.kiphy.common.extensions.postErrorState
 import com.github.ramonrabello.kiphy.common.extensions.postLoadedState
 import com.github.ramonrabello.kiphy.common.extensions.postLoadingState
-import com.github.ramonrabello.kiphy.trends.data.TrendingDataSource
 import com.github.ramonrabello.kiphy.trends.data.TrendingRepository
+import com.github.ramonrabello.kiphy.trends.data.source.local.LocalTrendingDataSource
+import com.github.ramonrabello.kiphy.trends.data.source.remote.RemoteTrendingDataSource
 import com.github.ramonrabello.kiphy.trends.model.TrendingResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,10 +30,7 @@ class TrendingViewModel : BaseViewModel() {
 
     private val repository by lazy {
         val api = ApiProvider.providesTrendingApi()
-        TrendingRepository(
-                TrendingDataSource.Remote(api),
-                TrendingDataSource.Local()
-        )
+        TrendingRepository(RemoteTrendingDataSource(api), LocalTrendingDataSource())
     }
 
     fun loadTrending() {
@@ -44,10 +42,8 @@ class TrendingViewModel : BaseViewModel() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSubscribe { _uiStateEvent.postLoadingState() }
-                    .subscribe(
-                            { trending -> onTrendingLoaded(trending) },
-                            { error -> onError(error) })
-                    .safeDispose()
+                    .subscribe(::onTrendingLoaded, ::onError)
+                    .composeDisposable()
         }
     }
 
