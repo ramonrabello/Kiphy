@@ -5,6 +5,6 @@ import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
 
 class RemoteTrendingDataSource(private val api: TrendingApi) : TrendingDataSource {
 
-        override fun loadTrending() = api.loadTrending()
+    override fun loadTrending() = api.loadTrending()
 
-    }
+}
