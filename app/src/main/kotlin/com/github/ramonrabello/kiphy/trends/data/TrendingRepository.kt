@@ -1,5 +1,6 @@
 package com.github.ramonrabello.kiphy.trends.data
 
+import com.github.ramonrabello.kiphy.trends.data.source.TrendingDataSource
 import io.reactivex.Single
 
 class TrendingRepository(
